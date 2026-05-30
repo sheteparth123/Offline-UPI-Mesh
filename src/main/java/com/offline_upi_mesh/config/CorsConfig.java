@@ -20,7 +20,8 @@ public class CorsConfig {
 
                 registry.addMapping("/**")
                         .allowedOrigins(
-                                "http://localhost:5173"
+                                "http://localhost:5173",
+                                "https://offline-upi-mesh.netlify.app/"
                         )
                         .allowedMethods(
                                 "*"
