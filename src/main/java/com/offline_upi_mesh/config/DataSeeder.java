@@ -23,57 +23,59 @@ public class DataSeeder implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args){
+    public void run(String... args) {
+
+        if (accountRepository.count() == 0) {
+
+            Account alice = new Account();
+
+            alice.setUsername("alice");
+            alice.setBalance(5000.0);
+
+            Account bob = new Account();
+
+            bob.setUsername("bob");
+            bob.setBalance(2000.0);
+
+            accountRepository.save(alice);
+            accountRepository.save(bob);
+
+            System.out.println(
+                    "Accounts seeded"
+            );
+        }
 
 
-        Account alice = new Account();
+        if (nodeRepository.count() == 0) {
 
-        alice.setUsername("alice");
-        alice.setBalance(5000.0);
+            VirtualNode alicePhone =
+                    new VirtualNode();
 
-
-        Account bob = new Account();
-
-        bob.setUsername("bob");
-        bob.setBalance(2000.0);
+            alicePhone.setNodeName("AlicePhone");
+            alicePhone.setInternetAvailable(false);
 
 
-        accountRepository.save(alice);
-        accountRepository.save(bob);
+            VirtualNode bobPhone =
+                    new VirtualNode();
+
+            bobPhone.setNodeName("BobPhone");
+            bobPhone.setInternetAvailable(false);
 
 
+            VirtualNode bridge =
+                    new VirtualNode();
 
-        VirtualNode alicePhone =
-                new VirtualNode();
-
-        alicePhone.setNodeName("AlicePhone");
-        alicePhone.setInternetAvailable(false);
-
+            bridge.setNodeName("BridgePhone");
+            bridge.setInternetAvailable(true);
 
 
-        VirtualNode bobPhone =
-                new VirtualNode();
+            nodeRepository.save(alicePhone);
+            nodeRepository.save(bobPhone);
+            nodeRepository.save(bridge);
 
-        bobPhone.setNodeName("BobPhone");
-        bobPhone.setInternetAvailable(false);
-
-
-
-        VirtualNode bridge =
-                new VirtualNode();
-
-        bridge.setNodeName("BridgePhone");
-        bridge.setInternetAvailable(true);
-
-
-
-        nodeRepository.save(alicePhone);
-        nodeRepository.save(bobPhone);
-        nodeRepository.save(bridge);
-
-
-        System.out.println(
-                "Accounts and nodes created"
-        );
+            System.out.println(
+                    "Nodes seeded"
+            );
+        }
     }
 }
